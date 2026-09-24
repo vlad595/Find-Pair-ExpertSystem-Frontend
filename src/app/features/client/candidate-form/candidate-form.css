@@ -1,0 +1,144 @@
+:host {
+    display: block;
+    padding: 3rem 1.25rem;
+    font-family: "DM Sans", sans-serif;
+}
+
+.candidate-form {
+    width: min(100%, 760px);
+    margin: 0 auto;
+}
+
+.candidate-form form {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border: 1px solid #e7e2f0;
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 1rem 2.75rem rgba(57, 37, 84, 0.1);
+}
+
+.fact-field {
+    display: grid;
+    gap: 0.7rem;
+    padding: 1.15rem;
+    border: 1px solid #eeeaf4;
+    border-radius: 0.9rem;
+    background: #fcfbfe;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.fact-field:hover {
+    border-color: #d9cdea;
+    box-shadow: 0 0.25rem 1rem rgba(63, 37, 98, 0.06);
+}
+
+.fact-field label {
+    color: #302542;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.fact-drop-zone {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+    padding: 0.35rem 0.75rem;
+    border: 1.5px dashed #b9a6d5;
+    border-radius: 0.7rem;
+    background: #faf8ff;
+    transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.fact-drop-zone:hover {
+    border-color: #8c65ba;
+    background: #f7f2ff;
+}
+
+.fact-drop-zone.cdk-drop-list-dragging {
+    border-color: #69439a;
+    background: #f0e7ff;
+    box-shadow: inset 0 0 0 1px #69439a;
+}
+
+.drop-placeholder {
+    color: #80758f;
+    font-size: 0.9rem;
+}
+
+.value-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 2.75rem;
+    gap: 0.55rem;
+    padding: 0.4rem 0;
+}
+
+.value-chip,
+.selected-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: grab;
+    user-select: none;
+    transition: transform 140ms ease, background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.value-chip {
+    border: 1px solid #ded5eb;
+    background: #ffffff;
+    color: #51405f;
+}
+
+.value-chip:hover {
+    border-color: #a680cf;
+    background: #f8f3ff;
+    box-shadow: 0 0.25rem 0.75rem rgba(91, 57, 137, 0.12);
+    transform: translateY(-1px);
+}
+
+.selected-chip {
+    border: 1px solid #8060ae;
+    background: #6b4699;
+    color: #ffffff;
+    box-shadow: 0 0.25rem 0.6rem rgba(82, 47, 126, 0.22);
+}
+
+.value-chip:active,
+.selected-chip:active {
+    cursor: grabbing;
+    transform: scale(0.97);
+}
+
+.cdk-drag-placeholder {
+    min-width: 5rem;
+    min-height: 2.25rem;
+    border: 1px dashed #a680cf;
+    border-radius: 999px;
+    background: #eee5fb;
+    opacity: 0.75;
+}
+
+@media (max-width: 560px) {
+    :host {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .candidate-form form {
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .fact-field {
+        padding: 0.9rem;
+    }
+}

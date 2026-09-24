@@ -1,1 +1,39 @@
-<p>candidate-form works!</p>
+<div class="candidate-form">
+    <form [formGroup]="clientForm">
+        @for (item of $asyncFacts | async; track item.fact) {
+            <section class="fact-field" cdkDropListGroup>
+                <label [for]="item.fact">{{ item.fact }}</label>
+                <div class="fact-drop-zone"
+                     cdkDropList
+                     [id]="'selected-' + item.fact"
+                     [cdkDropListData]="getSelectedValues(item.fact)"
+                     [cdkDropListEnterPredicate]="canEnterSelectedChip"
+                     [attr.aria-labelledby]="item.fact"
+                     (cdkDropListDropped)="onValueDropped($event)">
+                    @if (getSelectedValues(item.fact).length > 0) {
+                        @for (value of getSelectedValues(item.fact); track value) {
+                            <button type="button" class="selected-chip" cdkDrag>
+                                {{ value }}
+                            </button>
+                        }
+                    } @else {
+                        <span class="drop-placeholder">Перетягніть значення сюди</span>
+                    }
+                </div>
+
+                <div class="value-chips"
+                     cdkDropList
+                     [id]="'available-' + item.fact"
+                     [cdkDropListData]="item.values"
+                     aria-label="Доступні значення"
+                     (cdkDropListDropped)="onValueDropped($event)">
+                    @for (value of item.values; track value) {
+                        <button type="button" class="value-chip" cdkDrag>
+                            {{ value }}
+                        </button>
+                    }
+                </div>
+            </section>
+        }
+    </form>
+</div>
