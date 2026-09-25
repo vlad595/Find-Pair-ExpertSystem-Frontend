@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Fact } from '../models/fact.model';
 import { BehaviorSubject, tap } from 'rxjs';
+import { FindMatchData, MatchData } from '../models/match.model';
 
 @Service()
 export class ClientService {
@@ -17,5 +18,8 @@ export class ClientService {
                 this.factsSubject.next(response);
             })
         );
+    }
+    findMatch(formData: FindMatchData){
+        return this.http.post<MatchData>(this.apiUrl + '/api/Consultation/match', formData);
     }
 }

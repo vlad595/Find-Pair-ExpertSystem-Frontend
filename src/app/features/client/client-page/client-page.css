@@ -2,3 +2,16 @@ img{
     width: 100px;
     position: absolute;
 }
+
+.form-label-container{
+    width: 1fr;
+    background-color: rgba(137, 43, 226, 0.384);
+    display: flex;
+    padding: 10px;
+    margin: 0px 10px;
+}
+
+.form-label-container h2{
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
+}

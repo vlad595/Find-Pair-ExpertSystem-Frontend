@@ -1,5 +1,10 @@
 <div class="candidate-form">
     <form [formGroup]="clientForm">
+        <label for="gender">Select gender</label>
+        <select id="gender" formControlName="gender">
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+        </select>
         @for (item of $asyncFacts | async; track item.fact) {
             <section class="fact-field" cdkDropListGroup>
                 <label [for]="item.fact">{{ item.fact }}</label>
@@ -35,5 +40,6 @@
                 </div>
             </section>
         }
+        <button type="button" (click)="onSubmit()">Find pair</button>
     </form>
 </div>

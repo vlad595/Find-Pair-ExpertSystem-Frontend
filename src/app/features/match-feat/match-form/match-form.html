@@ -1,0 +1,76 @@
+<div class="minimal-container">
+  
+  <header class="page-header">
+    <h1>Результат сумісності</h1>
+    <p class="subtitle">Аналіз профілів завершено</p>
+  </header>
+
+  <div class="dashboard-layout">
+    
+    <div class="sidebar">
+      
+      <section class="card text-center">
+        <div class="score-circle">
+          <span class="score-value">{{ syncRate }}%</span>
+        </div>
+        <h2 class="card-title">Збіг профілів</h2>
+        <p class="score-details">{{ matchData.compatibilityScore }} спільних пунктів</p>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">Кандидат</h2>
+        <div class="profile-info">
+          <div class="info-row">
+            <span class="label">Ім'я</span>
+            <span class="value fw-medium">{{ matchData.bestMatch.fullName }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Вік / Стать</span>
+            <span class="value">{{ matchData.bestMatch.age }} / {{ matchData.bestMatch.gender }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">ID</span>
+            <span class="value text-muted id-text">{{ matchData.bestMatch.id }}</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="main-content">
+      <section class="card comparison-card">
+        <h2 class="card-title">Детальне порівняння</h2>
+        
+        <div class="table-container">
+          <table class="minimal-table">
+            <thead>
+              <tr>
+                <th>Параметр</th>
+                <th>Запит клієнта</th>
+                <th>Дані кандидата</th>
+                <th class="status-col">Статус</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of comparisonList; track item.key) {
+                <tr>
+                  <td class="param-name">{{ item.key.replace('_', ' ') }}</td>
+                  <td>{{ item.clientValue }}</td>
+                  <td>{{ item.matchValue }}</td>
+                  <td class="status-col">
+                    @if (item.isMatch) {
+                      <span class="badge badge-success">Збіг</span>
+                    } @else {
+                      <span class="badge badge-neutral">Різні</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</div>
