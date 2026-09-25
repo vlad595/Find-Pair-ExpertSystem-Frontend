@@ -1,1 +1,65 @@
-<p>candidates-section works!</p>
+<div class="candidates-op-container">
+    <section class="candidate-creation">
+        <div class="minimal-container">
+            <form [formGroup]="candidateCreationForm" (ngSubmit)="onSubmit()">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full name</label>
+                        <input formControlName="fullName" id="fullName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select formControlName="gender" id="gender">
+                            <option>Female</option>
+                            <option>Male</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input formControlName="age" id="age" type="number">
+                    </div>
+
+                    @for (item of $factsList | async; track $index) {
+                        <div class="form-group">
+                            <label [for]="item.fact">{{item.fact.replace('_', ' ')}}</label>
+                            <select #select [formControlName]="item.fact" [id]="item.fact" (change)="selectedOption(item.fact, select.value)">
+                                <option [value]=""></option>
+                                @for (val of item.values; track $index) {
+                                    <option [value]="val">{{val}}</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                </div>
+
+                <button type="button" (click)="onSubmit()">Create candidate</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="candidate-list">
+        <div class="minimal-container table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (candidate of $candidates | async; track $index) {
+                        <tr>
+                            <th>{{candidate.fullName}}</th>
+                            <th>{{candidate.age}}</th>
+                            <th>{{candidate.gender}}</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

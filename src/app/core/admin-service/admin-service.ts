@@ -3,6 +3,7 @@ import { inject, Service } from '@angular/core';
 import { CreateRule, DeleteRule } from '../models/rule.model';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { Rule } from '../models/rule.model';
+import { CandidateCreation, CandidateResponse } from '../models/candidate.model';
 
 @Service()
 export class AdminService {
@@ -11,6 +12,9 @@ export class AdminService {
 
     rulesSubject = new BehaviorSubject<Rule[]>([]);
     $rules = this.rulesSubject.asObservable();
+
+    candidatesSubject = new BehaviorSubject<CandidateResponse[]>([]);
+    $candidates = this.candidatesSubject.asObservable();
 
     getRules(){
         return this.http.get<Rule[]>(this.apiUrl + '/api/Rules').pipe(
@@ -34,6 +38,22 @@ export class AdminService {
                 this.rulesSubject.next([...this.rulesSubject.value.filter(r => r.Id !== ruleId.Id)]);
                 console.log('Rule are deleted successfully!', this.rulesSubject.value);
             })
+        );
+    }
+    postCandidate(candidate: CandidateCreation){
+        return this.http.post<CandidateResponse>(this.apiUrl + '/api/Candidates', candidate).pipe(
+            tap(response => {
+                this.candidatesSubject.next([response, ...this.candidatesSubject.value]);
+                console.log('Candidate are created successfully!', this.candidatesSubject.value);
+            })
+        );
+    }
+    getCandidates(){
+        return this.http.get<CandidateResponse[]>(this.apiUrl + '/api/Candidates').pipe(
+            tap(response => {
+                this.candidatesSubject.next(response);
+                console.log('Candidates are pulled successfully!', this.candidatesSubject.value);
+            })   
         );
     }
 }
