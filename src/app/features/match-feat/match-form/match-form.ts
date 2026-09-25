@@ -3,9 +3,10 @@ import { FactComparison, MatchData } from '../../../core/models/match.model';
 import { ClientService } from '../../../core/client-service/client-service';
 import { required } from '@angular/forms/signals';
 import { Router } from '@angular/router';
+import { KeyValuePipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [KeyValuePipe],
   selector: 'app-match-form',
   styleUrl: './match-form.css',
   templateUrl: './match-form.html',
