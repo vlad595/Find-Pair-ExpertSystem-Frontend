@@ -1,1 +1,68 @@
-<p>rules-section works!</p>
+<div class="candidates-op-container">
+    <section class="candidate-list">
+        <div class="minimal-container table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Condition</th>
+                        <th>Result</th>
+                        <th style="width: 80px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (rule of $rules | async; track rule.id) {
+                        <tr class="rule-row">
+                            <td>{{rule.description}}</td>
+                            <td>
+                                <strong>{{rule.conditionFact.replace('_', ' ')}}</strong> = {{rule.conditionValue}}
+                            </td>
+                            <td>
+                                <strong>{{rule.resultFact.replace('_', ' ')}}</strong> = {{rule.resultValue}}
+                            </td>
+                            <td>
+                                <button type="button" class="delete-btn" (click)="onDelete(rule.id)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="candidate-creation">
+        <div class="minimal-container">
+            <form [formGroup]="ruleCreationForm" (ngSubmit)="onSubmit()">
+                
+                <div class="form-grid">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="description">Description</label>
+                        <input formControlName="Description" id="description" placeholder="Опис правила...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conditionFact">Condition Fact (IF)</label>
+                        <input formControlName="ConditionFact" id="conditionFact" placeholder="Факт умови">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conditionValue">Condition Value</label>
+                        <input formControlName="ConditionValue" id="conditionValue" placeholder="Значення умови">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resultFact">Result Fact (THEN)</label>
+                        <input formControlName="ResultFact" id="resultFact" placeholder="Факт результату">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resultValue">Result Value</label>
+                        <input formControlName="ResultValue" id="resultValue" placeholder="Значення результату">
+                    </div>
+                </div>
+
+                <button type="button" (click)="onSubmit()">Create rule</button>
+            </form>
+        </div>
+    </section>
+</div>

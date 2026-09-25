@@ -26,13 +26,17 @@ export class CandidatesSection {
   candidateCreationForm: FormGroup = new FormGroup({
     fullName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     gender: new FormControl('', Validators.required),
-    age: new FormControl('', [Validators.required, Validators.minLength(18), Validators.maxLength(120)]),
+    age: new FormControl(18, [Validators.required, Validators.min(18), Validators.max(120)]),
   });
 
   ngOnInit(){
     this.$factsList = this._clientService.$facts;
     this._clientService.getListOfFacts().subscribe();
-    this._service.getCandidates().subscribe();
+    this._service.getCandidates().subscribe({
+      error: (error) => {
+        console.error('Failed posting candidate', error);
+      }
+    });
     this.$factsList.subscribe({
       next: (response) => {
         this.facts = response;
@@ -55,12 +59,14 @@ export class CandidatesSection {
 
   onSubmit(){
     if(this.candidateCreationForm.valid){
+      const formValues = this.candidateCreationForm.value;
       const candidateCreationFormData: CandidateCreation = {
-        fullName: this.candidateCreationForm.value('fullName'),
-        gender: this.candidateCreationForm.value('gender'),
-        age: this.candidateCreationForm.value('age'),
+        fullName: formValues['fullName'],
+        gender: formValues['gender'],
+        age: formValues['age'],
         facts: this.selectedFacts
       };
+      this._service.postCandidate(candidateCreationFormData).subscribe();
     }
   }
 }

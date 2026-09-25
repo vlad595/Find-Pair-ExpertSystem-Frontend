@@ -27,25 +27,31 @@ export class AdminService {
     postRule(rule: CreateRule){
         return this.http.post<Rule>(this.apiUrl + '/api/Rules', rule).pipe(
             tap(response => {
-                this.rulesSubject.next([response, ...this.rulesSubject.value]);
-                console.log('Rule are created successfully!', this.rulesSubject.value);
+                if (response){
+                    this.rulesSubject.next([response, ...this.rulesSubject.value]);
+                    console.log('Rule are created successfully!', this.rulesSubject.value);
+                }
+                else {
+                    this.getRules().subscribe();
+                }
             })
         );
     }
     deleteRule(ruleId: DeleteRule){
-        return this.http.delete(this.apiUrl + '/api/Rules' + ruleId.Id).pipe(
+        return this.http.delete(this.apiUrl + '/api/Rules/' + ruleId.id).pipe(
             tap(respone => {
-                this.rulesSubject.next([...this.rulesSubject.value.filter(r => r.Id !== ruleId.Id)]);
+                this.rulesSubject.next([...this.rulesSubject.value.filter(r => r.id !== ruleId.id)]);
                 console.log('Rule are deleted successfully!', this.rulesSubject.value);
             })
         );
     }
     postCandidate(candidate: CandidateCreation){
+        console.log('Trying to send post candidate query with data: ', candidate);
         return this.http.post<CandidateResponse>(this.apiUrl + '/api/Candidates', candidate).pipe(
             tap(response => {
                 this.candidatesSubject.next([response, ...this.candidatesSubject.value]);
                 console.log('Candidate are created successfully!', this.candidatesSubject.value);
-            })
+            }),
         );
     }
     getCandidates(){

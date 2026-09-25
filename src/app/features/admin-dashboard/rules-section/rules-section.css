@@ -1,0 +1,137 @@
+:host {
+  display: block;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.candidates-op-container {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.minimal-container {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow-y: auto; 
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 0.3rem;
+}
+
+input, select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+
+  &:focus {
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #111827;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #374151;
+  }
+}
+
+.table-container {
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  
+  th {
+    background-color: #f9fafb;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.85rem;
+    color: #6b7280;
+    position: sticky;
+    top: 0;
+  }
+  
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.9rem;
+  }
+}
+
+/* Hover-логіка для рядків таблиці та кнопки видалення */
+.rule-row {
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: #f9fafb;
+    
+    .delete-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.delete-btn {
+  margin-top: 0;
+  padding: 0.4rem 0.8rem;
+  background-color: #ef4444;
+  width: auto;
+  font-size: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.2s ease;
+  
+  &:hover {
+    background-color: #dc2626;
+  }
+}

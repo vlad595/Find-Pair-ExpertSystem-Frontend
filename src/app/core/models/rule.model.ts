@@ -1,20 +1,20 @@
 export interface Rule{
-    Id: string;
-    Description: string;
-    ConditionFact: string;
-    ConditionValue: string;
-    ResultFact: string;
-    ResultValue: string;
+    id: string;
+    description: string;
+    conditionFact: string;
+    conditionValue: string;
+    resultFact: string;
+    resultValue: string;
 }
 
 export interface CreateRule{
-    Description: string;
-    ConditionFact: string;
-    ConditionValue: string;
-    ResultFact: string;
-    ResultValue: string;
+    description: string;
+    conditionFact: string;
+    conditionValue: string;
+    resultFact: string;
+    resultValue: string;
 }
 
 export interface DeleteRule{
-    Id: string;
+    id: string;
 }
